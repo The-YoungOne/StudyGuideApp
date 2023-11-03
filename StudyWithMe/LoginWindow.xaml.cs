@@ -50,43 +50,65 @@ namespace StudyWithMe
             SqlConnection con = new SqlConnection(connection);
 
             string query = "SELECT COUNT(*) FROM [Users] WHERE [Username] = @Username";
-
-            con.Open();
             int count = 0;
-            using (SqlCommand cmd = new SqlCommand(query, con))
+            try
             {
-                cmd.Parameters.AddWithValue("@Username", usernametextBox.Text);
-                count = (int)cmd.ExecuteScalar();
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Username", usernametextBox.Text);
+                    count = (int)cmd.ExecuteScalar();
+                }
+                con.Close();
             }
-            con.Close();
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Error finding username: {ex}");
+            }
 
             if(count > 0)
             {
-                con.Open();
                 string storedPassword = "";
-                string selectPasswordQuery = "SELECT Password FROM [Users] WHERE Username = @Username";
-
-                using (SqlCommand selectCmd = new SqlCommand(selectPasswordQuery, con))
+                try
                 {
-                    selectCmd.Parameters.AddWithValue("@Username", username);
-                    storedPassword = selectCmd.ExecuteScalar() as string;
+                    con.Open();
+                    string selectPasswordQuery = "SELECT Password FROM [Users] WHERE Username = @Username";
+
+                    using (SqlCommand selectCmd = new SqlCommand(selectPasswordQuery, con))
+                    {
+                        selectCmd.Parameters.AddWithValue("@Username", username);
+                        storedPassword = selectCmd.ExecuteScalar() as string;
+                    }
+                    con.Close();
                 }
-                con.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error fetching password --> {ex}");
+                }
 
                 if (password.Equals(storedPassword))
                 {
                     MessageBox.Show("Login Successful.", "Notification", MessageBoxButton.OK);
 
-                    string semesterQuery = "SELECT COUNT(*) FROM [Semesters] WHERE [Username] = @Username_username";
-
-                    con.Open();
                     int cnt = 0;
-                    using (SqlCommand cmd = new SqlCommand(semesterQuery, con))
+                    try
                     {
-                        cmd.Parameters.AddWithValue("@Username_username", usernametextBox.Text);
-                        cnt = (int)cmd.ExecuteScalar();
+                        string semesterQuery = "SELECT COUNT(*) FROM [Semesters] WHERE [Username_username] = @username";
+
+                        con.Open();
+                        using (SqlCommand cmd = new SqlCommand(semesterQuery, con))
+                        {
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            cnt = (int)cmd.ExecuteScalar();
+                        }
+                        con.Close();
                     }
-                    con.Close();
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show($"Error: {ex}");
+                    }
 
                     if(cnt > 0)
                     {

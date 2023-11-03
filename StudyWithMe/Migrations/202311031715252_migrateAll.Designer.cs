@@ -7,13 +7,13 @@ namespace StudyWithMe.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class firstMigrate : IMigrationMetadata
+    public sealed partial class migrateAll : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(firstMigrate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(migrateAll));
         
         string IMigrationMetadata.Id
         {
-            get { return "202311030751141_firstMigrate"; }
+            get { return "202311031715252_migrateAll"; }
         }
         
         string IMigrationMetadata.Source

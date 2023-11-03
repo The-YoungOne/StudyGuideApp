@@ -115,4 +115,8 @@ C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\bin\Deb
 C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\bin\Debug\MDriven.Net.Http.dll
 C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\Dashboard.baml
 C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\ModuleWindow.baml
-C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\StudyWithMe.Migrations.firstMigrate.resources
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\ModuleCalendarWindow.g.cs
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\ModuleCalendarWindow.baml
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\obj\Debug\StudyWithMe.Migrations.migrateAll.resources
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\bin\Debug\StudyGuideDLL.dll
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyWithMe\bin\Debug\StudyGuideDLL.pdb

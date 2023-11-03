@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firstMigrate : DbMigration
+    public partial class migrateAll : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,6 @@
                         calendar_id = c.Int(nullable: false, identity: true),
                         studyDate = c.DateTime(nullable: false),
                         hoursStudied = c.Double(nullable: false),
-                        ModuleId = c.Int(nullable: false),
                         Module_module_id = c.Int(),
                     })
                 .PrimaryKey(t => t.calendar_id)

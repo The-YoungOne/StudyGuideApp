@@ -15,7 +15,6 @@ namespace StudyWithMe
         public int calendar_id { get; set; }
         public DateTime studyDate { get; set; }
         public double hoursStudied { get; set; }
-        public int ModuleId { get; set; }
         public Module Module { get; set; }
     }
 }

@@ -37,6 +37,7 @@
         <!--datagrid view for module info-->
         <DataGrid x:Name="moduleDataGrid" ItemsSource="{Binding moduleItems}" IsReadOnly="True" AutoGenerateColumns="False" Margin="381,122,19,136" Grid.ColumnSpan="2" SelectionChanged="moduleDataGrid_SelectionChanged">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Module ID" Binding="{Binding module_id}" />
                 <DataGridTextColumn Header="Module Code" Binding="{Binding code}" />
                 <DataGridTextColumn Header="Module Name" Binding="{Binding name}" />
                 <DataGridTextColumn Header="Module Credits" Binding="{Binding credits}" />

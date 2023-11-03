@@ -74,7 +74,7 @@ namespace StudyWithMe
                         try
                         {
                             con.Open();
-                            string insertQuery = "INSERT INTO [Semesters] (weeks, startDate, endDate, username) VALUES (@weeks, @startDate, @endDate, @username)";
+                            string insertQuery = "INSERT INTO [Semesters] (weeks, startDate, endDate, Username_username) VALUES (@weeks, @startDate, @endDate, @username)";
                             using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                             {
                                 cmd.Parameters.AddWithValue("@weeks", weeks);
@@ -82,19 +82,19 @@ namespace StudyWithMe
                                 cmd.Parameters.AddWithValue("@endDate", endDate);
                                 cmd.Parameters.AddWithValue("@username", username);
                                 cmd.ExecuteNonQuery();
-
-                                MessageBox.Show("Semester Infomration Saved.", "Notification:", MessageBoxButton.OK);
-
-                                //object of the dashboard window
-                                Dashboard window = new Dashboard(username);
-
-                                //displays Dashboard window
-                                window.Show();
-
-                                //hides current window
-                                Close();
                             }
                             con.Close();
+
+                            MessageBox.Show("Semester Infomration Saved.", "Notification:", MessageBoxButton.OK);
+
+                            //object of the dashboard window
+                            Dashboard window = new Dashboard(username);
+
+                            //displays Dashboard window
+                            window.Show();
+
+                            //hides current window
+                            Close();
                         }
                         catch (Exception ex)
                         {

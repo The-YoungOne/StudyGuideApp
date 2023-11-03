@@ -1,0 +1,6 @@
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\bin\Debug\StudyGuideDLL.dll
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\bin\Debug\StudyGuideDLL.pdb
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\obj\Debug\StudyGuideDLL.csproj.AssemblyReference.cache
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\obj\Debug\StudyGuideDLL.csproj.CoreCompileInputs.cache
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\obj\Debug\StudyGuideDLL.dll
+C:\Users\lab_services_student\Documents\GitHub\StudyGuideApp\StudyGuideDLL\obj\Debug\StudyGuideDLL.pdb

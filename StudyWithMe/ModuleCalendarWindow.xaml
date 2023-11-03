@@ -1,0 +1,44 @@
+﻿<Window x:Class="StudyWithMe.ModuleCalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudyWithMe"
+        mc:Ignorable="d"
+        Title="ModuleCalendarWindow" Height="450" Width="800">
+    <Grid Margin="0,0,-44,0">
+
+        <!-- Setting Background-->
+        <Grid.Background>
+            <ImageBrush x:Name="backgroundImg" ImageSource="Images/wp6.jpg" ></ImageBrush>
+        </Grid.Background>
+
+        <Viewbox Margin="226,0,225,0">
+            <Calendar x:Name="ModuleCalendar" SelectedDatesChanged="ModuleCalendar_SelectedDatesChanged" BorderBrush="#FFDCB8B8" Foreground="#FFFFF2F2">
+                <Calendar.Background>
+                    <ImageBrush/>
+                </Calendar.Background>
+            </Calendar>
+        </Viewbox>
+
+        <!--calendar design elements-->
+        <Button x:Name="returnButton" Content="RETURN TO DASHBOARD" FontSize="17" FontWeight="Light" Foreground="Brown" Background="Wheat" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Click="returnButton_Click" Height="34" Width="211"/>
+        <RichTextBox x:Name="ModuleInfoTxtBox" Background="Beige" FontSize="15" Foreground="Brown" FontWeight="Bold" FontStyle="Italic" Margin="30,53,643,37">
+            <FlowDocument>
+                <Paragraph>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <RichTextBox x:Name="weklyStdHrsTxtBox" Visibility="Hidden" FontSize="15" Background="Beige" Foreground="Brown" FontWeight="Bold" FontStyle="Italic" Margin="645,63,22,101">
+            <FlowDocument>
+                <Paragraph LineHeight="16">
+
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button x:Name="datesStudiedButton" Content="DAYS STUDIED LIST" FontSize="17" FontWeight="Light" Foreground="Brown" Background="Wheat" HorizontalAlignment="Left" Margin="658,24,0,0" VerticalAlignment="Top" Click= "datesStudiedButton_Click" Height="34" Width="164"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="658,58,0,0" TextWrapping="Wrap" FontSize="15" Visibility="Hidden"  VerticalAlignment="Top" Width="184" Height="310"/>
+        <Button x:Name="closeStudiedButton" Content="CLOSE STUDY LIST" FontSize="17" Visibility="Hidden" FontWeight="Light"  Foreground="Brown" Background="Wheat" HorizontalAlignment="Left" Margin="658,363,0,0" VerticalAlignment="Top" Click="closeStudiedButton_Click" Height="34" Width="164"/>
+    </Grid>
+</Window>

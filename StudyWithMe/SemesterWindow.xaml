@@ -18,6 +18,6 @@
         <Label x:Name="label_Copy1" Content="SEMESTER INFORMATION" HorizontalAlignment="Center" Margin="0,79,0,0" FontSize="20" FontWeight="Bold" Foreground="RosyBrown" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy2" Content="fill in the fields" HorizontalAlignment="Center" Margin="0,116,0,0" FontSize="15" FontWeight="Normal" Foreground="RosyBrown" VerticalAlignment="Top"/>
         <Button x:Name="exitButton_Copy" Content="CONTINUE" FontSize="20" FontWeight="Light" Foreground="Brown" Background="Wheat" HorizontalAlignment="Left" Margin="193,238,0,0" VerticalAlignment="Top" Click="continueButton_Click" Height="31" Width="133"/>
-        <DatePicker Name="datePicker" Margin="386,204,125,124"></DatePicker>
+        <DatePicker Name="datePicker" Margin="386,204,125,100"></DatePicker>
     </Grid>
 </Window>

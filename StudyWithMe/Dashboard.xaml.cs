@@ -28,6 +28,8 @@ namespace StudyWithMe
         //private readonly ViewModel viewModel;
         protected string connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StudyWithMe.ApplicationDbContext;Integrated Security=True";
         private string username;
+        private Semester semInfo;
+
         public Dashboard(string username)
         {
             this.username = username;
@@ -38,68 +40,87 @@ namespace StudyWithMe
         public void loadInfo()
         {
             SqlConnection con = new SqlConnection(connection);
-            string selectSemesterQuery = "SELECT weeks, startDate, endDate FROM [SemesterTable] WHERE username = @UserId";
+            string selectSemesterQuery = "SELECT weeks, startDate, endDate FROM [Semesters] WHERE [Username_username] = @username";
             try
             {
+                con.Open();
 
+                using (SqlCommand selectCmd = new SqlCommand(selectSemesterQuery, con))
+                {
+                    selectCmd.Parameters.AddWithValue("@username", username);
+
+                    using (SqlDataReader reader = selectCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int numberOfWeeks = reader.GetInt32(0);
+                            DateTime startDate = reader.GetDateTime(1);
+                            DateTime endDate = reader.GetDateTime(2);
+
+                            richTextBox.AppendText($"Number of Weeks: {numberOfWeeks}\nStart Date: {startDate.ToShortDateString()}\nEnd Date: {endDate.ToShortDateString()}");
+
+                            semInfo = new Semester
+                            {
+                                weeks= numberOfWeeks,
+                                startDate= startDate,
+                                endDate = endDate
+                            };
+                        }
+                        else
+                        {
+                            MessageBox.Show("No Semester information is assigned to your profile.", "Notification", MessageBoxButton.OK);
+                        }
+                    }
+                }
+                con.Close();
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show($"Error: {ex}");
+                MessageBox.Show($"Failed to Read Semester --> Error:\n\n{ex}");
             }
-            con.Open();
-
-            using (SqlCommand selectCmd = new SqlCommand(selectSemesterQuery, con))
-            {
-                selectCmd.Parameters.AddWithValue("@username", username);
-
-                using (SqlDataReader reader = selectCmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        int numberOfWeeks = reader.GetInt32(0);
-                        DateTime startDate = reader.GetDateTime(1);
-                        DateTime endDate = reader.GetDateTime(2);
-
-                        richTextBox.AppendText($"Number of Weeks: {numberOfWeeks}\nStart Date: {startDate.ToShortDateString()}\nEnd Date: {endDate.ToShortDateString()}");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Not Semester information is assigned to your profile.", "Notification", MessageBoxButton.OK);
-                    }
-                }
-            }
-            string selectModulesQuery = "SELECT code, name, credits, classHrsPerWeek FROM [SemesterTable] WHERE username = @username";
+            
+            string selectModulesQuery = "SELECT module_id, code, name, credits, classHrsPerWeek FROM [Modules] WHERE Username_username = @username";
 
             List<Module> modules = new List<Module>();
 
-
-            using (SqlCommand selectModCmd = new SqlCommand(selectModulesQuery, con))
+            try
             {
-                selectModCmd.Parameters.AddWithValue("@Username", username);
-
-                using (SqlDataReader reader = selectModCmd.ExecuteReader())
+                con.Open();
+                using (SqlCommand selectModCmd = new SqlCommand(selectModulesQuery, con))
                 {
-                    while (reader.Read())
+                    selectModCmd.Parameters.AddWithValue("@username", username);
+
+                    using (SqlDataReader reader = selectModCmd.ExecuteReader())
                     {
-                        Module module = new Module
+                        while (reader.Read())
                         {
-                            code = reader.GetString(0),
-                            name = reader.GetString(1),
-                            credits = int.Parse(reader.GetString(2)),
-                            classHrsPerWeek = int.Parse(reader.GetString(3))
-                        };
-                        modules.Add(module);
+                            Module module = new Module
+                            {
+                                module_id= reader.GetInt32(0),
+                                code = reader.GetString(1),
+                               
+                                name = reader.GetString(2),
+                                credits = reader.GetInt32(3),
+                                classHrsPerWeek = reader.GetInt32(4)
+                            };
+                            modules.Add(module);
+                        }
                     }
                 }
-            }
+                con.Close();
 
-            ViewModel view = new ViewModel
+                ViewModel view = new ViewModel
+                {
+                    moduleItems = modules
+                };
+                this.DataContext = view;
+            }
+            catch (Exception ex)
             {
-                moduleItems = modules
-            };
-            this.DataContext = view;
+
+                MessageBox.Show($"Failed to read Modules --> error:\n\n{ex}"); ;
+            }
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)
@@ -121,10 +142,12 @@ namespace StudyWithMe
         private void moduleDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Module selectedMod = (Module)moduleDataGrid.SelectedItem;
-            //ModuleCalendarWindow window = new ModuleCalendarWindow(semInfo, selectedMod);
 
-            //displays calendar window
-            //window.Show();
+            //object of the Module Calendar window
+            ModuleCalendarWindow window = new ModuleCalendarWindow(semInfo, selectedMod, username);
+
+            //displays Module Calendar window
+            window.Show();
 
             //hides current window
             Close();

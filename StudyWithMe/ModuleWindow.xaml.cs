@@ -72,7 +72,7 @@ namespace StudyWithMe
                             try
                             {
                                 con.Open();
-                                string insertQuery = "INSERT INTO [Modules] (code, name, credits, classHrsPerWeek, username) VALUES (@code, @name, @credits, @classHrsPerWeek, @username)";
+                                string insertQuery = "INSERT INTO [Modules] (code, name, credits, classHrsPerWeek, Username_username) VALUES (@code, @name, @credits, @classHrsPerWeek, @username)";
                                 using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                                 {
                                     cmd.Parameters.AddWithValue("@code", code);
@@ -81,23 +81,22 @@ namespace StudyWithMe
                                     cmd.Parameters.AddWithValue("@classHrsPerWeek", numHrsWeek);
                                     cmd.Parameters.AddWithValue("@username", username);
                                     cmd.ExecuteNonQuery();
-
-                                    MessageBox.Show("Module Infomration Saved.", "Notification:", MessageBoxButton.OK);
-
-                                    //object of the dashboard window
-                                    Dashboard window = new Dashboard(username);
-
-                                    //displays Dashboard window
-                                    window.Show();
-
-                                    //hides current window
-                                    Close();
                                 }
                                 con.Close();
+
+                                MessageBox.Show("Module Infomration Saved.", "Notification:", MessageBoxButton.OK);
+
+                                //object of the dashboard window
+                                Dashboard window = new Dashboard(username);
+
+                                //displays Dashboard window
+                                window.Show();
+
+                                //hides current window
+                                Close();
                             }
                             catch (Exception ex)
                             {
-
                                 MessageBox.Show($"Module infromation failed to save --> Error: {ex}");
                             }
                         }
